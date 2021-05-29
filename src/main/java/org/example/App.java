@@ -20,13 +20,14 @@ public class App {
         final double MEN_R = 0.73;
         final double WOMEN_R = 0.66;
         double r;
-        String weightPrompt = "How much do you weigh? (lbs)";
+        String weightPrompt = "How much do you weigh?";
         String drinksPrompt = "How many drinks have you had?";
-        String ouncesPrompt = "How many ounces were in each drink?";
-        String hoursPrompt = "How long has it been since your last drink? (hours)";
+        String ouncesPrompt = "How many ounces were in the drinks you were having?";
+        String abvPrompt = "What was the alcohol by volume of the drinks you had?";
+        String hoursPrompt = "How long has it been since your last drink?";
 
-        // Call getInt, which ensures the user enters an integer
-        int weight = getInt(weightPrompt);
+        // Call getDouble, which ensures the user enters an integer
+        double weight = getDouble(weightPrompt);
 
         // Prompt the user for their gender
         System.out.println("What is your gender? (M/F)");
@@ -41,13 +42,14 @@ public class App {
             r = WOMEN_R;
         }
 
-        // Call getInt to ensure the user enters an integer for these values
-        int drinks = getInt(drinksPrompt);
-        int ounces = getInt(ouncesPrompt);
-        int hours = getInt(hoursPrompt);
+        // Call getDouble to ensure the user enters an integer for these values
+        double drinks = getDouble(drinksPrompt);
+        double ounces = getDouble(ouncesPrompt);
+        double abv = getDouble(abvPrompt);
+        double hours = getDouble(hoursPrompt);
 
         // Calculate the user's BAC content
-        int alcoholConsumed = drinks * ounces;
+        double alcoholConsumed = (drinks * ounces) * (abv / 100);
         double bac = ((alcoholConsumed * 5.14) / (weight * r)) - (.015 * hours);
 
         // Limit any variable called by df.format() to two decimal places
@@ -63,8 +65,9 @@ public class App {
         System.out.println(msg);
     }
 
-    // Get int function, loops until user enters an integer
-    public static int getInt(String prompt) {
+    // Get int function, loops until user enters an integer (technically
+    // double but still works)
+    public static double getDouble(String prompt) {
         Scanner sc = new Scanner(System.in);
         System.out.println(prompt);
 
@@ -72,13 +75,13 @@ public class App {
         // the while loop will output this message for the amount of strings
         // inputted, but still works in the sense that it does not allow the user
         // to continue until an integer is inputted
-        while (!sc.hasNextInt()) {
+        while (!sc.hasNextDouble()) {
             System.out.println("Sorry, you must enter an integer, please try again.");
             sc.next();
         }
 
         // If we have exited the while loop, that means we had an integer
         // be inputted, so we can return that int
-        return sc.nextInt();
+        return sc.nextDouble();
     }
 }
