@@ -20,11 +20,13 @@ public class App {
         final double MEN_R = 0.73;
         final double WOMEN_R = 0.66;
         double r;
+        String m = "m";
+        String male = "male";
         String weightPrompt = "How much do you weigh?";
         String drinksPrompt = "How many drinks have you had?";
         String ouncesPrompt = "How many ounces were in the drinks you were having?";
-        String abvPrompt = "What was the alcohol by volume of the drinks you had?";
-        String hoursPrompt = "How long has it been since your last drink?";
+        String abvPrompt = "What was the ABV of the drinks you had? (%)";
+        String hoursPrompt = "How long has it been since your last drink? (hours)";
 
         // Call getDouble, which ensures the user enters an integer
         double weight = getDouble(weightPrompt);
@@ -36,7 +38,8 @@ public class App {
 
         // Update the alcoholic distribution ratio depending
         // on the user's gender
-        if (gender.equals("M")) {
+        if (m.equals(gender.toLowerCase()) ||
+                male.equals(gender.toLowerCase())) {
             r = MEN_R;
         } else {
             r = WOMEN_R;
@@ -77,7 +80,7 @@ public class App {
         // to continue until an integer is inputted
         while (!sc.hasNextDouble()) {
             System.out.println("Sorry, you must enter an integer, please try again.");
-            sc.next();
+            sc.nextLine();
         }
 
         // If we have exited the while loop, that means we had an integer
