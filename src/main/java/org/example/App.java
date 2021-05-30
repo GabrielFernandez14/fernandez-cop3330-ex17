@@ -19,30 +19,29 @@ public class App {
         final double UNSAFE_BAC = 0.08;
         final double MEN_R = 0.73;
         final double WOMEN_R = 0.66;
-        double r;
-        String m = "m";
-        String male = "male";
+        double r = 0;
         String weightPrompt = "How much do you weigh?";
+        String genderPrompt = "What is your gender? (male = 1, female = 2)";
         String drinksPrompt = "How many drinks have you had?";
         String ouncesPrompt = "How many ounces were in the drinks you were having?";
         String abvPrompt = "What was the ABV of the drinks you had? (%)";
         String hoursPrompt = "How long has it been since your last drink? (hours)";
+        String errorPrompt = "Sorry, you must enter 1 or 2, please try again.";
 
         // Call getDouble, which ensures the user enters an integer
         double weight = getDouble(weightPrompt);
+        double gender = getDouble(genderPrompt);
 
-        // Prompt the user for their gender
-        System.out.println("What is your gender? (M/F)");
-        Scanner genderIn = new Scanner(System.in);
-        String gender = genderIn.next();
-
-        // Update the alcoholic distribution ratio depending
-        // on the user's gender
-        if (m.equals(gender.toLowerCase()) ||
-                male.equals(gender.toLowerCase())) {
-            r = MEN_R;
-        } else {
-            r = WOMEN_R;
+        while (r == 0) {
+            if (gender == 1) {
+                r = MEN_R;
+            }
+            else if (gender == 2) {
+                r = WOMEN_R;
+            }
+            else {
+                gender = getDouble(errorPrompt);
+            }
         }
 
         // Call getDouble to ensure the user enters an integer for these values
@@ -74,10 +73,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         System.out.println(prompt);
 
-        // Unfortunately, if the user decides to input multiple strings
-        // the while loop will output this message for the amount of strings
-        // inputted, but still works in the sense that it does not allow the user
-        // to continue until an integer is inputted
+        // Loop until the user enters an integer value
         while (!sc.hasNextDouble()) {
             System.out.println("Sorry, you must enter an integer, please try again.");
             sc.nextLine();
