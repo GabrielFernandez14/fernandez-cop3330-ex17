@@ -1,7 +1,6 @@
-/* Gabriel Fernandez
- * COP3330 - Summer CV01
- * "Motivated" Practice Exercises
- * Exercise 17 - Blood Alcohol Calculator
+/*
+ *  UCF COP3330 Summer 2021 Assignment 1 Solutions
+ *  Copyright 2021 Gabriel Fernandez
  */
 
 package org.example;
